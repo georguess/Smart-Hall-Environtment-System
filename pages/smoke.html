@@ -1,0 +1,101 @@
+<nav class="navbar">
+  <button class="btn-back" onclick="goTo('landing')">← Kembali</button>
+  <div class="navbar-logo">HM</div>
+  <div class="navbar-title">
+    Deteksi Asap
+    <small>Smoke Detection System</small>
+  </div>
+</nav>
+
+<div class="feat-page-body">
+  <div class="feat-intro">
+    <div class="feat-intro-icon" style="background:#fef3c7">💨</div>
+    <div>
+      <h2>Sistem Deteksi Asap</h2>
+      <p>Sensor MQ-2 mendeteksi konsentrasi asap dan gas berbahaya di udara. Nilai output berupa satuan analog (ppm-equivalent) yang diproses ESP32 untuk menentukan respons otomatis.</p>
+    </div>
+  </div>
+
+  <div class="panel">
+    <div class="panel-title">🏭 Sumber Asap & Estimasi Nilai MQ-2</div>
+    <div class="source-grid">
+      <div class="source-card">
+        <div class="si-ico">🚬</div>
+        <div class="si-name">Asap Rokok</div>
+        <div class="si-val">~200–400 ppm</div>
+        <div class="si-desc">Rokok yang menyala dalam ruangan tertutup</div>
+      </div>
+      <div class="source-card">
+        <div class="si-ico">🔥</div>
+        <div class="si-name">Gas LPG</div>
+        <div class="si-val">~300–800+ ppm</div>
+        <div class="si-desc">Kebocoran gas LPG dari tabung/kompor</div>
+      </div>
+      <div class="source-card">
+        <div class="si-ico">🍳</div>
+        <div class="si-name">Asap Masakan</div>
+        <div class="si-val">~150–350 ppm</div>
+        <div class="si-desc">Masakan gosong atau minyak terbakar</div>
+      </div>
+      <div class="source-card">
+        <div class="si-ico">♨️</div>
+        <div class="si-name">Pembakaran</div>
+        <div class="si-val">~500–1000+ ppm</div>
+        <div class="si-desc">Kertas, kayu, atau material terbakar</div>
+      </div>
+    </div>
+  </div>
+
+  <div class="panel">
+    <div class="panel-title">📊 Rentang Nilai Sensor MQ-2</div>
+    <div class="range-grid">
+      <div class="range-card rc-clean">
+        <div class="rv" style="color:var(--safe)">&lt; 200</div>
+        <div class="rl" style="color:#065f46">✅ Udara Bersih</div>
+        <div class="rd">Kondisi normal, tidak ada asap yang terdeteksi</div>
+      </div>
+      <div class="range-card rc-light1">
+        <div class="rv" style="color:#ca8a04">200–349</div>
+        <div class="rl" style="color:#92400e">⚠️ Sangat Ringan</div>
+        <div class="rd">Ada sedikit asap, sistem hanya memantau</div>
+      </div>
+      <div class="range-card rc-light2">
+        <div class="rv" style="color:#ea580c">350–500</div>
+        <div class="rl" style="color:#9a3412">🔔 Ringan — Buzzer!</div>
+        <div class="rd">Ambang batas — buzzer berbunyi otomatis</div>
+      </div>
+      <div class="range-card rc-heavy">
+        <div class="rv" style="color:var(--danger)">&gt; 500</div>
+        <div class="rl" style="color:#991b1b">🚨 Asap Berat</div>
+        <div class="rd">Asap sangat tinggi — indikasi kebakaran</div>
+      </div>
+    </div>
+  </div>
+
+  <div class="panel">
+    <div class="panel-title">⚡ Respons Otomatis Sistem</div>
+    <div class="resp-item">
+      <div class="ri-icon">🔔</div>
+      <div>
+        <div class="ri-name">Buzzer Aktif</div>
+        <div class="ri-desc">Berbunyi ketika nilai MQ-2 mencapai 350–500 ppm (asap ringan)</div>
+      </div>
+    </div>
+    <div class="resp-item">
+      <div class="ri-icon">🚨</div>
+      <div>
+        <div class="ri-name">Mode Darurat</div>
+        <div class="ri-desc">Jika MQ-2 > 500 ppm + Suhu > 36°C → sistem kebakaran aktif</div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<footer>
+  <div class="fc">© 2026 HIMATRO Universitas Lampung</div>
+  <div class="fs">Device: ESP32 | System: IoT Based Monitoring</div>
+  <div class="socials">
+    <a class="sb" href="https://www.instagram.com/himatro.unila/" target="_blank" title="Instagram"><svg viewBox="0 0 24 24"><path d="M12 2.163c3.204 0 3.584.012 4.85.07 3.252.148 4.771 1.691 4.919 4.919.058 1.265.069 1.645.069 4.849 0 3.205-.012 3.584-.069 4.849-.149 3.225-1.664 4.771-4.919 4.919-1.266.058-1.644.07-4.85.07-3.204 0-3.584-.012-4.849-.07-3.26-.149-4.771-1.699-4.919-4.92-.058-1.265-.07-1.644-.07-4.849 0-3.204.013-3.583.07-4.849.149-3.227 1.664-4.771 4.919-4.919 1.266-.057 1.645-.069 4.849-.069zM12 0C8.741 0 8.333.014 7.053.072 2.695.272.273 2.69.073 7.052.014 8.333 0 8.741 0 12c0 3.259.014 3.668.072 4.948.2 4.358 2.618 6.78 6.98 6.98C8.333 23.986 8.741 24 12 24c3.259 0 3.668-.014 4.948-.072 4.354-.2 6.782-2.618 6.979-6.98.059-1.28.073-1.689.073-4.948 0-3.259-.014-3.667-.072-4.947-.196-4.354-2.617-6.78-6.979-6.98C15.668.014 15.259 0 12 0zm0 5.838a6.162 6.162 0 100 12.324 6.162 6.162 0 000-12.324zM12 16a4 4 0 110-8 4 4 0 010 8zm6.406-11.845a1.44 1.44 0 100 2.881 1.44 1.44 0 000-2.881z"/></svg></a>
+    <a class="sb" href="https://himatrounila.id/" target="_blank" title="Website"><svg viewBox="0 0 24 24"><path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm-1 17.93c-3.95-.49-7-3.85-7-7.93 0-.62.08-1.21.21-1.79L9 15v1c0 1.1.9 2 2 2v1.93zm6.9-2.54c-.26-.81-1-1.39-1.9-1.39h-1v-3c0-.55-.45-1-1-1H8v-2h2c.55 0 1-.45 1-1V7h2c1.1 0 2-.9 2-2v-.41c2.93 1.19 5 4.06 5 7.41 0 2.08-.8 3.97-2.1 5.39z"/></svg></a>
+  </div>
+</footer>

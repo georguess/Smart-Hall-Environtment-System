@@ -1,0 +1,637 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Smart Hall Environment System — HIMATRO UNILA</title>
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700;800;900&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="assets/css/style.css">
+</head>
+<body>
+
+<!-- ==================== LANDING ==================== -->
+<div class="page active" id="landing">
+  <div class="hero">
+    <div class="hero-chip"> IoT Based Monitoring</div>
+    <h1>Smart Hall<br>Environment System</h1>
+    <p>Sistem pemantauan lingkungan gedung berbasis IoT secara real-time — mendeteksi asap, suhu, dan kebakaran secara otomatis untuk keamanan sivitas akademika.</p>
+    <button class="hero-btn" onclick="goTo('dashboard')">
+      📊 Lihat Dashboard
+      <span>→</span>
+    </button>
+    <div class="hero-cards">
+      <div class="hc">
+        <div class="hc-icon">🌡️</div>
+        <div class="hc-val">28°C</div>
+        <div class="hc-lbl">Suhu</div>
+      </div>
+      <div class="hc">
+        <div class="hc-icon">💨</div>
+        <div class="hc-val">120</div>
+        <div class="hc-lbl">Asap MQ-2</div>
+      </div>
+      <div class="hc">
+        <div class="hc-icon">✅</div>
+        <div class="hc-val" style="font-size:15px">AMAN</div>
+        <div class="hc-lbl">Status</div>
+      </div>
+    </div>
+  </div>
+
+  <!-- About -->
+  <div class="lsec">
+    <div class="slabel">Tentang Proyek</div>
+    <div class="stitle">Teknologi yang Digunakan</div>
+    <div class="sdesc">Sistem ini mengintegrasikan mikrokontroler ESP32 dengan sensor-sensor lingkungan untuk memberikan pemantauan dan respons otomatis secara real-time.</div>
+    <div class="tech-grid">
+      <div class="tc">
+        <div class="tc-icon">🔌</div>
+        <div>
+          <h4>ESP32 Microcontroller</h4>
+          <p>Otak sistem — menghubungkan semua sensor ke jaringan WiFi dan mengirimkan data ke dashboard web secara real-time.</p>
+        </div>
+      </div>
+      <div class="tc">
+        <div class="tc-icon">💨</div>
+        <div>
+          <h4>MQ-2 Smoke Sensor</h4>
+          <p>Mendeteksi konsentrasi asap dan gas berbahaya. Outputnya berupa nilai analog ppm yang diproses ESP32.</p>
+        </div>
+      </div>
+      <div class="tc">
+        <div class="tc-icon">🌡️</div>
+        <div>
+          <h4>DHT22 Temperature Sensor</h4>
+          <p>Mengukur suhu dan kelembaban udara dengan presisi tinggi. Range: -40°C hingga 80°C.</p>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Features -->
+  <div class="lsec alt-bg">
+    <div class="inner">
+      <div class="slabel">Fitur Sistem</div>
+      <div class="stitle">Apa yang Bisa Dipantau?</div>
+      <div class="feat-grid">
+        <div class="fc-card fc-smoke" onclick="goTo('smoke')">
+          <div class="fc-top">
+            <div class="fc-icon-wrap">💨</div>
+            <div class="fc-title">Deteksi Asap (Smoke Detection)</div>
+          </div>
+          <div class="fc-desc">Memantau konsentrasi asap menggunakan sensor MQ-2 dengan threshold otomatis untuk membunyikan buzzer.</div>
+          <div class="fc-arrow-btn">→</div>
+        </div>
+        <div class="fc-card fc-heat" onclick="goTo('heat')">
+          <div class="fc-top">
+            <div class="fc-icon-wrap">🌡️</div>
+            <div class="fc-title">Deteksi Panas (Heat Detection)</div>
+          </div>
+          <div class="fc-desc">Memantau suhu ruangan dan mengaktifkan kipas ventilasi otomatis ketika melewati ambang batas.</div>
+          <div class="fc-arrow-btn">→</div>
+        </div>
+        <div class="fc-card fc-fire" onclick="goTo('fire')">
+          <div class="fc-top">
+            <div class="fc-icon-wrap">🔥</div>
+            <div class="fc-title">Deteksi Kebakaran (Fire Detection)</div>
+          </div>
+          <div class="fc-desc">Kombinasi deteksi asap tinggi DAN suhu tinggi untuk penanganan darurat kebakaran secara menyeluruh.</div>
+          <div class="fc-arrow-btn">→</div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- System Overview -->
+  <div class="lsec">
+    <div class="slabel">Arsitektur Sistem</div>
+    <div class="stitle">Bagaimana Cara Kerjanya?</div>
+    <div class="sdesc">Data dari sensor dikumpulkan oleh ESP32, dikirim melalui WiFi, dan ditampilkan secara real-time di web dashboard.</div>
+    <div class="flow-wrap">
+      <div class="flow-node">
+        <div class="fn-ico">🌡️💨</div>
+        <div class="fn-lbl">Sensor</div>
+        <div class="fn-sub">DHT22 & MQ-2</div>
+      </div>
+      <div class="flow-arrow">→</div>
+      <div class="flow-node">
+        <div class="fn-ico">🔌</div>
+        <div class="fn-lbl">ESP32</div>
+        <div class="fn-sub">Mikrokontroler</div>
+      </div>
+      <div class="flow-arrow">→</div>
+      <div class="flow-node">
+        <div class="fn-ico">📶</div>
+        <div class="fn-lbl">WiFi</div>
+        <div class="fn-sub">Transmisi</div>
+      </div>
+      <div class="flow-arrow">→</div>
+      <div class="flow-node">
+        <div class="fn-ico">📊</div>
+        <div class="fn-lbl">Dashboard</div>
+        <div class="fn-sub">Web Real-time</div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Developers CTA -->
+  <div class="lsec alt-bg">
+    <div class="inner">
+      <div class="slabel">Tim Pengembang</div>
+      <div class="stitle">Dikembangkan Oleh</div>
+      <div class="dev-cta" onclick="goTo('developers')">
+        <div class="dev-logo-wrap"> <img src="assets/image/Logo_Hima.png" alt="HIMATRO Logo">
+        </div>
+          <h3>HIMATRO — Universitas Lampung</h3>
+          <p>Himpunan Mahasiswa Teknik Elektro · Lihat Tim Developer →</p>
+        </div>
+        <div class="dev-cta-arr">›</div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- ==================== DASHBOARD ==================== -->
+<div class="page" id="dashboard">
+  <nav class="navbar">
+    <button class="btn-back" onclick="goTo('landing')">← Kembali</button>
+    <div class="navbar-logo">HM</div>
+    <div class="navbar-title">
+      Dashboard
+      <small>Smart Hall Environment System</small>
+    </div>
+    <span class="badge badge-safe" id="dash-badge">🟢 SAFE</span>
+  </nav>
+
+  <div class="dash-body">
+    <!-- Status row -->
+    <div class="status-row" id="status-row">
+      <div class="si safe" id="status-icon">✅</div>
+      <div>
+        <div class="st-lbl"><span class="sdot safe" id="status-dot"></span>System Status</div>
+        <div class="st-val safe" id="status-val">AMAN — Kondisi Normal</div>
+      </div>
+    </div>
+
+    <!-- Sensor cards -->
+    <div class="sensor-grid">
+      <div class="sc">
+        <div class="sc-lbl">🌡️ Suhu</div>
+        <div><span class="sc-val" id="temp-val">28</span><span class="sc-unit">°C</span></div>
+        <div class="sc-bar"><div class="sc-fill" id="temp-bar" style="width:56%;background:var(--safe)"></div></div>
+      </div>
+      <div class="sc">
+        <div class="sc-lbl">💨 Asap MQ-2</div>
+        <div><span class="sc-val" id="smoke-val">120</span><span class="sc-unit">ppm</span></div>
+        <div class="sc-bar"><div class="sc-fill" id="smoke-bar" style="width:12%;background:var(--safe)"></div></div>
+      </div>
+    </div>
+
+    <!-- Device panel -->
+    <div class="panel">
+      <div class="panel-title">🔧 Status Perangkat</div>
+      <div class="drow">
+        <div class="drow-ico">🔔</div>
+        <div>
+          <div class="drow-name">Buzzer</div>
+          <div class="drow-desc">Aktif saat asap ≥350 atau kondisi darurat</div>
+        </div>
+        <span class="badge badge-off drow-badge" id="dev-buzzer">OFF</span>
+      </div>
+      <div class="drow">
+        <div class="drow-ico">💨</div>
+        <div>
+          <div class="drow-name">Ventilation Fan</div>
+          <div class="drow-desc">Aktif saat suhu >28°C atau kondisi darurat</div>
+        </div>
+        <span class="badge badge-off drow-badge" id="dev-fan">OFF</span>
+      </div>
+      <div class="drow">
+        <div class="drow-ico">💧</div>
+        <div>
+          <div class="drow-name">Water Pump</div>
+          <div class="drow-desc">Aktif hanya saat kondisi kebakaran terdeteksi</div>
+        </div>
+        <span class="badge badge-off drow-badge" id="dev-pump">OFF</span>
+      </div>
+    </div>
+
+    <!-- Chart -->
+    <div class="panel">
+      <div class="panel-title">📈 Riwayat Suhu (Terakhir 10 Pembacaan)</div>
+      <div class="mini-chart">
+        <canvas id="tempChart"></canvas>
+      </div>
+    </div>
+
+    <!-- Log -->
+    <div class="panel">
+      <div class="panel-title">📋 Activity Log</div>
+      <div class="log-list" id="log-list">
+        <div class="log-entry">
+          <div class="ldot info"></div>
+          <div class="ltime">--:--:--</div>
+          <div class="lmsg">Sistem dimulai — Memuat data sensor...</div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <footer>
+    <div class="fc">© 2026 HIMATRO Universitas Lampung</div>
+    <div class="fs">Device: ESP32 | System: IoT Based Monitoring</div>
+    <div class="socials">
+      <a class="sb" href="https://www.instagram.com/himatro.unila/" target="_blank" title="Instagram">
+      <svg viewBox="0 0 24 24"><path d="M12 2.163c3.204 0 3.584.012 4.85.07 3.252.148 4.771 1.691 4.919 4.919.058 1.265.069 1.645.069 4.849 0 3.205-.012 3.584-.069 4.849-.149 3.225-1.664 4.771-4.919 4.919-1.266.058-1.644.07-4.85.07-3.204 0-3.584-.012-4.849-.07-3.26-.149-4.771-1.699-4.919-4.92-.058-1.265-.07-1.644-.07-4.849 0-3.204.013-3.583.07-4.849.149-3.227 1.664-4.771 4.919-4.919 1.266-.057 1.645-.069 4.849-.069zM12 0C8.741 0 8.333.014 7.053.072 2.695.272.273 2.69.073 7.052.014 8.333 0 8.741 0 12c0 3.259.014 3.668.072 4.948.2 4.358 2.618 6.78 6.98 6.98C8.333 23.986 8.741 24 12 24c3.259 0 3.668-.014 4.948-.072 4.354-.2 6.782-2.618 6.979-6.98.059-1.28.073-1.689.073-4.948 0-3.259-.014-3.667-.072-4.947-.196-4.354-2.617-6.78-6.979-6.98C15.668.014 15.259 0 12 0zm0 5.838a6.162 6.162 0 100 12.324 6.162 6.162 0 000-12.324zM12 16a4 4 0 110-8 4 4 0 010 8zm6.406-11.845a1.44 1.44 0 100 2.881 1.44 1.44 0 000-2.881z"/></svg>
+    </a>
+    <a class="sb" href="https://www.tiktok.com/@himatro.unila" target="_blank" title="TikTok">
+      <svg viewBox="0 0 24 24"><path d="M19.59 6.69a4.83 4.83 0 01-3.77-4.25V2h-3.45v13.67a2.89 2.89 0 01-2.88 2.5 2.89 2.89 0 01-2.89-2.89 2.89 2.89 0 012.89-2.89c.28 0 .54.04.79.1V9.01a6.33 6.33 0 00-.79-.05 6.34 6.34 0 00-6.34 6.34 6.34 6.34 0 006.34 6.34 6.34 6.34 0 006.33-6.34V8.69a8.27 8.27 0 004.84 1.55V6.79a4.85 4.85 0 01-1.07-.1z"/></svg>
+    </a>
+    <a class="sb" href="https://x.com/Himatro_Unila" target="_blank" title="X / Twitter">
+      <svg viewBox="0 0 24 24"><path d="M18.244 2.25h3.308l-7.227 8.26 8.502 11.24H16.17l-4.714-6.231-5.401 6.231H2.747l7.73-8.835L1.254 2.25H8.08l4.261 5.635zm-1.161 17.52h1.833L7.084 4.126H5.117z"/></svg>
+    </a>
+    <a class="sb" href="https://himatrounila.id/" target="_blank" title="Website">
+      <svg viewBox="0 0 24 24"><path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm-1 17.93c-3.95-.49-7-3.85-7-7.93 0-.62.08-1.21.21-1.79L9 15v1c0 1.1.9 2 2 2v1.93zm6.9-2.54c-.26-.81-1-1.39-1.9-1.39h-1v-3c0-.55-.45-1-1-1H8v-2h2c.55 0 1-.45 1-1V7h2c1.1 0 2-.9 2-2v-.41c2.93 1.19 5 4.06 5 7.41 0 2.08-.8 3.97-2.1 5.39z"/></svg>
+    </a>  </div>
+  </footer>
+</div>
+
+<!-- ==================== SMOKE DETECTION ==================== -->
+<div class="page" id="smoke">
+  <nav class="navbar">
+    <button class="btn-back" onclick="goTo('landing')">← Kembali</button>
+    <div class="navbar-logo">HM</div>
+    <div class="navbar-title">
+      Deteksi Asap
+      <small>Smoke Detection System</small>
+    </div>
+  </nav>
+
+  <div class="feat-page-body">
+    <div class="feat-intro">
+      <div class="feat-intro-icon" style="background:#fef3c7">💨</div>
+      <div>
+        <h2>Sistem Deteksi Asap</h2>
+        <p>Sensor MQ-2 mendeteksi konsentrasi asap dan gas berbahaya di udara. Nilai output berupa satuan analog (ppm-equivalent) yang diproses ESP32 untuk menentukan respons otomatis.</p>
+      </div>
+    </div>
+
+    <div class="panel">
+      <div class="panel-title">🏭 Sumber Asap & Estimasi Nilai MQ-2</div>
+      <div class="source-grid">
+        <div class="source-card">
+          <div class="si-ico">🚬</div>
+          <div class="si-name">Asap Rokok</div>
+          <div class="si-val">~200–400 ppm</div>
+          <div class="si-desc">Rokok yang menyala dalam ruangan tertutup</div>
+        </div>
+        <div class="source-card">
+          <div class="si-ico">🔥</div>
+          <div class="si-name">Gas LPG</div>
+          <div class="si-val">~300–800+ ppm</div>
+          <div class="si-desc">Kebocoran gas LPG dari tabung/kompor</div>
+        </div>
+        <div class="source-card">
+          <div class="si-ico">🍳</div>
+          <div class="si-name">Asap Masakan</div>
+          <div class="si-val">~150–350 ppm</div>
+          <div class="si-desc">Masakan gosong atau minyak terbakar</div>
+        </div>
+        <div class="source-card">
+          <div class="si-ico">♨️</div>
+          <div class="si-name">Pembakaran</div>
+          <div class="si-val">~500–1000+ ppm</div>
+          <div class="si-desc">Kertas, kayu, atau material terbakar</div>
+        </div>
+      </div>
+    </div>
+
+    <div class="panel">
+      <div class="panel-title">📊 Rentang Nilai Sensor MQ-2</div>
+      <div class="range-grid">
+        <div class="range-card rc-clean">
+          <div class="rv" style="color:var(--safe)">&lt; 200</div>
+          <div class="rl" style="color:#065f46">✅ Udara Bersih</div>
+          <div class="rd">Kondisi normal, tidak ada asap yang terdeteksi</div>
+        </div>
+        <div class="range-card rc-light1">
+          <div class="rv" style="color:#ca8a04">200–349</div>
+          <div class="rl" style="color:#92400e">⚠️ Sangat Ringan</div>
+          <div class="rd">Ada sedikit asap, sistem hanya memantau</div>
+        </div>
+        <div class="range-card rc-light2">
+          <div class="rv" style="color:#ea580c">350–500</div>
+          <div class="rl" style="color:#9a3412">🔔 Ringan — Buzzer!</div>
+          <div class="rd">Ambang batas — buzzer berbunyi otomatis</div>
+        </div>
+        <div class="range-card rc-heavy">
+          <div class="rv" style="color:var(--danger)">&gt; 500</div>
+          <div class="rl" style="color:#991b1b">🚨 Asap Berat</div>
+          <div class="rd">Asap sangat tinggi — indikasi kebakaran</div>
+        </div>
+      </div>
+    </div>
+
+    <div class="panel">
+      <div class="panel-title">⚡ Respons Otomatis Sistem</div>
+      <div class="resp-item">
+        <div class="ri-icon">🔔</div>
+        <div>
+          <div class="ri-name">Buzzer Aktif</div>
+          <div class="ri-desc">Berbunyi ketika nilai MQ-2 mencapai 350–500 ppm (asap ringan)</div>
+        </div>
+      </div>
+      <div class="resp-item">
+        <div class="ri-icon">🚨</div>
+        <div>
+          <div class="ri-name">Mode Darurat</div>
+          <div class="ri-desc">Jika MQ-2 > 500 ppm + Suhu > 36°C → sistem kebakaran aktif</div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- ==================== HEAT DETECTION ==================== -->
+<div class="page" id="heat">
+  <nav class="navbar">
+    <button class="btn-back" onclick="goTo('landing')">← Kembali</button>
+    <div class="navbar-logo">HM</div>
+    <div class="navbar-title">
+      Deteksi Panas
+      <small>Heat Detection System</small>
+    </div>
+  </nav>
+
+  <div class="feat-page-body">
+    <div class="feat-intro">
+      <div class="feat-intro-icon" style="background:#ffe4e6">🌡️</div>
+      <div>
+        <h2>Sistem Deteksi Suhu</h2>
+        <p>Sensor DHT22 memantau suhu ruangan secara presisi. Ketika suhu melewati ambang batas 36°C, sistem akan mengaktifkan kipas ventilasi secara otomatis untuk menjaga kenyamanan dan keselamatan.</p>
+      </div>
+    </div>
+
+    <div class="panel">
+      <div class="panel-title">🌈 Visualisasi Skala Suhu</div>
+      <div class="thermo-wrap" style="background:var(--bg);border-radius:12px;padding:14px;margin-top:0">
+        <div class="thermo-bar">
+          <div class="thermo-marker"></div>
+        </div>
+        <div class="thermo-labels">
+          <span style="color:#3b82f6">0°C</span>
+          <span style="color:#10b981">Nyaman</span>
+          <span style="color:#f59e0b">Hangat</span>
+          <span style="color:#ef4444">50°C</span>
+        </div>
+      </div>
+      <p style="font-size:11px;color:var(--text-muted);margin-top:10px;line-height:1.6">Garis vertikal menunjukkan threshold 36°C — batas dimana kipas ventilasi diaktifkan otomatis.</p>
+    </div>
+
+    <div class="panel">
+      <div class="panel-title">📊 Klasifikasi Suhu Ruangan</div>
+      <div class="range-grid">
+        <div class="range-card rc-cool">
+          <div class="rv" style="color:#2563eb">&lt; 20°C</div>
+          <div class="rl" style="color:#1e40af">❄️ Dingin</div>
+          <div class="rd">Suhu rendah, pertimbangkan penghangatan ruangan</div>
+        </div>
+        <div class="range-card rc-comfort">
+          <div class="rv" style="color:var(--safe)">20–28°C</div>
+          <div class="rl" style="color:#065f46">✅ Nyaman</div>
+          <div class="rd">Suhu ideal untuk aktivitas dalam ruangan</div>
+        </div>
+        <div class="range-card rc-warm">
+          <div class="rv" style="color:#ea580c">28–36°C</div>
+          <div class="rl" style="color:#9a3412">⚠️ Hangat</div>
+          <div class="rd">Mulai panas, monitoring ditingkatkan</div>
+        </div>
+        <div class="range-card rc-hot">
+          <div class="rv" style="color:var(--danger)">&gt; 36°C</div>
+          <div class="rl" style="color:#991b1b">🌶️ Panas — Kipas!</div>
+          <div class="rd">Suhu tinggi — kipas ventilasi aktif otomatis</div>
+        </div>
+      </div>
+    </div>
+
+    <div class="panel">
+      <div class="panel-title">⚡ Respons Otomatis Sistem</div>
+      <div class="resp-item">
+        <div class="ri-icon">💨</div>
+        <div>
+          <div class="ri-name">Kipas Ventilasi Aktif</div>
+          <div class="ri-desc">Otomatis menyala ketika suhu melewati 36°C untuk sirkulasi udara</div>
+        </div>
+      </div>
+      <div class="resp-item">
+        <div class="ri-icon">🔔</div>
+        <div>
+          <div class="ri-name">Notifikasi Warning</div>
+          <div class="ri-desc">Status berubah ke WARNING saat suhu 28–36°C untuk pemantauan lebih ketat</div>
+        </div>
+      </div>
+      <div class="resp-item">
+        <div class="ri-icon">🚨</div>
+        <div>
+          <div class="ri-name">Mode Darurat</div>
+          <div class="ri-desc">Jika Suhu > 36°C + MQ-2 > 500 ppm → sistem kebakaran penuh aktif</div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- ==================== FIRE DETECTION ==================== -->
+<div class="page" id="fire">
+  <nav class="navbar">
+    <button class="btn-back" onclick="goTo('landing')">← Kembali</button>
+    <div class="navbar-logo">HM</div>
+    <div class="navbar-title">
+      Deteksi Kebakaran
+      <small>Fire Detection System</small>
+    </div>
+  </nav>
+
+  <div class="feat-page-body">
+    <div class="feat-intro">
+      <div class="feat-intro-icon" style="background:#fee2e2">🔥</div>
+      <div>
+        <h2>Sistem Deteksi Kebakaran</h2>
+        <p>Kebakaran terdeteksi melalui kombinasi logika AND antara nilai asap MQ-2 yang sangat tinggi dan suhu yang melewati batas kritis. Seluruh perangkat darurat diaktifkan secara bersamaan.</p>
+      </div>
+    </div>
+
+    <div class="panel">
+      <div class="panel-title">💻 Logika Arduino (Pseudocode)</div>
+      <div class="code-block">
+        <span class="cmt">// Kondisi sistem berdasarkan pembacaan sensor</span><br>
+        <span class="kw">bool</span> kebakaran = (mq &gt; <span class="num">500</span> <span class="op">&amp;&amp;</span> suhu &gt; <span class="num">36</span>);<br>
+        <span class="kw">bool</span> panas      = (suhu &gt; <span class="num">36</span>);<br>
+        <span class="kw">bool</span> asapRingan = (mq &gt;= <span class="num">350</span> <span class="op">&amp;&amp;</span> mq &lt;= <span class="num">500</span>);<br><br>
+        <span class="kw">if</span> (kebakaran) {<br>
+        &nbsp;&nbsp;pump.<span class="op">on</span>(); buzzer.<span class="op">on</span>(); fan.<span class="op">on</span>();<br>
+        } <span class="kw">else if</span> (panas) {<br>
+        &nbsp;&nbsp;fan.<span class="op">on</span>(); buzzer.<span class="op">on</span>();<br>
+        } <span class="kw">else if</span> (asapRingan) {<br>
+        &nbsp;&nbsp;buzzer.<span class="op">on</span>();<br>
+        }
+      </div>
+    </div>
+
+    <div class="panel">
+      <div class="panel-title">🔗 Logika AND — Kondisi Kebakaran</div>
+      <div class="logic-and">
+        <div class="logic-box">
+          <div class="lb-icon">💨</div>
+          <div class="lb-cond">MQ-2 &gt; 500</div>
+          <div class="lb-val">Asap sangat tinggi</div>
+        </div>
+        <div class="logic-and-badge">AND</div>
+        <div class="logic-box">
+          <div class="lb-icon">🌡️</div>
+          <div class="lb-cond">Suhu &gt; 36°C</div>
+          <div class="lb-val">Suhu kritis</div>
+        </div>
+      </div>
+      <div class="logic-result">
+        <div class="lr-icon">🔥</div>
+        <div class="lr-text">KEBAKARAN TERDETEKSI!</div>
+        <div class="lr-sub">Semua perangkat darurat diaktifkan serentak</div>
+      </div>
+    </div>
+
+    <div class="panel">
+      <div class="panel-title">📊 Tabel Kondisi & Respons</div>
+      <table class="compare-table">
+        <thead>
+          <tr><th>Kondisi</th><th>MQ-2</th><th>Suhu</th><th>Respons</th></tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td>🟡 Asap Ringan</td>
+            <td>350–500</td>
+            <td>Berapa pun</td>
+            <td>Buzzer ON</td>
+          </tr>
+          <tr>
+            <td>🟠 Suhu Tinggi</td>
+            <td>Berapa pun</td>
+            <td>&gt; 36°C</td>
+            <td>Fan + Buzzer ON</td>
+          </tr>
+          <tr class="danger-row">
+            <td><strong>🔴 Kebakaran</strong></td>
+            <td><strong>&gt; 500</strong></td>
+            <td><strong>&gt; 36°C</strong></td>
+            <td><strong>Semua ON!</strong></td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+
+    <div class="response-card">
+      <h4>🚨 Respons Darurat Kebakaran</h4>
+      <div class="resp-item">
+        <div class="ri-icon">💧</div>
+        <div>
+          <div class="ri-name">Water Pump</div>
+          <div class="ri-desc">Pompa air aktif untuk pemadaman awal kebakaran</div>
+        </div>
+      </div>
+      <div class="resp-item">
+        <div class="ri-icon">🔔</div>
+        <div>
+          <div class="ri-name">Buzzer / Alarm</div>
+          <div class="ri-desc">Peringatan suara keras untuk evakuasi segera</div>
+        </div>
+      </div>
+      <div class="resp-item">
+        <div class="ri-icon">💨</div>
+        <div>
+          <div class="ri-name">Ventilation Fan</div>
+          <div class="ri-desc">Kipas menyala untuk membantu mengeluarkan asap</div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- ==================== DEVELOPERS ==================== -->
+<div class="page" id="developers">
+  <nav class="navbar">
+    <button class="btn-back" onclick="goTo('landing')">← Kembali</button>
+    <div class="navbar-title">
+      Tim Developer
+      <small>HIMATRO — Universitas Lampung</small>
+    </div>
+  </nav>
+
+  <div class="dev-body">
+    <div class="dev-header-card">
+      <div class="dh-logo"><img src="assets/image/Logo_Hima.png" alt="HIMATRO Logo" style="width:150px;height: 150px;object-fit:contain"></div>
+      <div class="dh-org">HIMATRO</div>
+      <div class="dh-univ">Himpunan Mahasiswa Teknik Elektro<br>Universitas Lampung</div>
+    </div>
+
+    <div style="margin-bottom:12px">
+      <div class="slabel">Tim Pengembang</div>
+      <div class="stitle" style="font-size:18px">Meet the Team</div>
+    </div>
+
+    <div class="team-grid">
+      <div class="team-card tc-design">
+        <div class="tc-role-badge" style="background:#ede9fe;color:#7c3aed">Web Designer</div>
+        <div class="tc-avatar" style="border-color:#c4b5fd"><img src="assets/image/crop fadhel.jpg" alt="Profile" style="width:100%;height:100%;object-fit:cover;border-radius:50%"></div>
+        <div class="tc-name">Muhammad Fadhel Saputra</div>
+        <div class="tc-npm">NPM 2415061097</div>
+        <div class="tc-desc">Merancang tampilan UI/UX, memastikan pengalaman pengguna yang intuitif dan estetis sesuai identitas HIMATRO.</div>
+      </div>
+      <div class="team-card tc-front">
+        <div class="tc-role-badge" style="background:#dbeafe;color:#2563eb">Frontend Dev</div>
+        <div class="tc-avatar" style="border-color:#93c5fd"><img src="assets/image/crop fadhel.jpg" alt="Profile" style="width:100%;height:100%;object-fit:cover;border-radius:50%"></div>
+        <div class="tc-name">Muhammad Fadhel Saputra</div>
+        <div class="tc-npm">NPM 2415061097</div>
+        <div class="tc-desc">Mengimplementasikan antarmuka web dengan React, mengelola state data sensor, dan animasi real-time dashboard.</div>
+      </div>
+      <div class="team-card tc-back">
+        <div class="tc-role-badge" style="background:#d1fae5;color:#065f46">Backend Dev</div>
+        <div class="tc-avatar" style="border-color:#6ee7b7"><img src="assets/image/crop fadhel.jpg" alt="Profile" style="width:100%;height:100%;object-fit:cover;border-radius:50%"></div>
+        <div class="tc-name">Muhammad Fadhel Saputra</div>
+        <div class="tc-npm">NPM 2415061097</div>
+        <div class="tc-desc">Membangun server dan API untuk menerima data dari ESP32, menyimpan ke database, dan menyajikan ke frontend.</div>
+      </div>
+      <div class="team-card tc-iot">
+        <div class="tc-role-badge" style="background:#ffe4e6;color:#be123c">IoT Engineer</div>
+        <div class="tc-avatar" style="border-color:#fda4af"><img src="assets/image/crop fadhel.jpg" alt="Profile" style="width:100%;height:100%;object-fit:cover;border-radius:50%"></div>
+        <div class="tc-name">Muhammad Fadhel Saputra</div>
+        <div class="tc-npm">NPM 2415061097</div>
+        <div class="tc-desc">Memprogram firmware ESP32, mengintegrasikan sensor DHT22 dan MQ-2, serta logika kontrol perangkat otomatis.</div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- ==================== GLOBAL FOOTER ==================== -->
+<footer>
+  <div class="fc">© 2026 HIMATRO Universitas Lampung</div>
+  <div class="fs">Device: ESP32 | System: IoT Based Monitoring</div>
+  <div class="socials">
+    <a class="sb" href="https://www.instagram.com/himatro.unila/" target="_blank" title="Instagram">
+      <svg viewBox="0 0 24 24"><path d="M12 2.163c3.204 0 3.584.012 4.85.07 3.252.148 4.771 1.691 4.919 4.919.058 1.265.069 1.645.069 4.849 0 3.205-.012 3.584-.069 4.849-.149 3.225-1.664 4.771-4.919 4.919-1.266.058-1.644.07-4.85.07-3.204 0-3.584-.012-4.849-.07-3.26-.149-4.771-1.699-4.919-4.92-.058-1.265-.07-1.644-.07-4.849 0-3.204.013-3.583.07-4.849.149-3.227 1.664-4.771 4.919-4.919 1.266-.057 1.645-.069 4.849-.069zM12 0C8.741 0 8.333.014 7.053.072 2.695.272.273 2.69.073 7.052.014 8.333 0 8.741 0 12c0 3.259.014 3.668.072 4.948.2 4.358 2.618 6.78 6.98 6.98C8.333 23.986 8.741 24 12 24c3.259 0 3.668-.014 4.948-.072 4.354-.2 6.782-2.618 6.979-6.98.059-1.28.073-1.689.073-4.948 0-3.259-.014-3.667-.072-4.947-.196-4.354-2.617-6.78-6.979-6.98C15.668.014 15.259 0 12 0zm0 5.838a6.162 6.162 0 100 12.324 6.162 6.162 0 000-12.324zM12 16a4 4 0 110-8 4 4 0 010 8zm6.406-11.845a1.44 1.44 0 100 2.881 1.44 1.44 0 000-2.881z"/></svg>
+    </a>
+    <a class="sb" href="https://www.tiktok.com/@himatro.unila" target="_blank" title="TikTok">
+      <svg viewBox="0 0 24 24"><path d="M19.59 6.69a4.83 4.83 0 01-3.77-4.25V2h-3.45v13.67a2.89 2.89 0 01-2.88 2.5 2.89 2.89 0 01-2.89-2.89 2.89 2.89 0 012.89-2.89c.28 0 .54.04.79.1V9.01a6.33 6.33 0 00-.79-.05 6.34 6.34 0 00-6.34 6.34 6.34 6.34 0 006.34 6.34 6.34 6.34 0 006.33-6.34V8.69a8.27 8.27 0 004.84 1.55V6.79a4.85 4.85 0 01-1.07-.1z"/></svg>
+    </a>
+    <a class="sb" href="https://x.com/Himatro_Unila" target="_blank" title="X / Twitter">
+      <svg viewBox="0 0 24 24"><path d="M18.244 2.25h3.308l-7.227 8.26 8.502 11.24H16.17l-4.714-6.231-5.401 6.231H2.747l7.73-8.835L1.254 2.25H8.08l4.261 5.635zm-1.161 17.52h1.833L7.084 4.126H5.117z"/></svg>
+    </a>
+    <a class="sb" href="https://himatrounila.id/" target="_blank" title="Website">
+      <svg viewBox="0 0 24 24"><path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm-1 17.93c-3.95-.49-7-3.85-7-7.93 0-.62.08-1.21.21-1.79L9 15v1c0 1.1.9 2 2 2v1.93zm6.9-2.54c-.26-.81-1-1.39-1.9-1.39h-1v-3c0-.55-.45-1-1-1H8v-2h2c.55 0 1-.45 1-1V7h2c1.1 0 2-.9 2-2v-.41c2.93 1.19 5 4.06 5 7.41 0 2.08-.8 3.97-2.1 5.39z"/></svg>
+    </a>
+  </div>
+</footer>
+
+<script src="https://cdnjs.cloudflare.com/ajax/libs/paho-mqtt/1.0.1/mqttws31.min.js"></script>
+<script src="assets/js/app.js"></script>
+</body>
+</html>

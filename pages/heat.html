@@ -1,0 +1,94 @@
+<nav class="navbar">
+  <button class="btn-back" onclick="goTo('landing')">← Kembali</button>
+  <div class="navbar-logo">HM</div>
+  <div class="navbar-title">
+    Deteksi Panas
+    <small>Heat Detection System</small>
+  </div>
+</nav>
+
+<div class="feat-page-body">
+  <div class="feat-intro">
+    <div class="feat-intro-icon" style="background:#ffe4e6">🌡️</div>
+    <div>
+      <h2>Sistem Deteksi Suhu</h2>
+      <p>Sensor DHT22 memantau suhu ruangan secara presisi. Ketika suhu melewati ambang batas 36°C, sistem akan mengaktifkan kipas ventilasi secara otomatis untuk menjaga kenyamanan dan keselamatan.</p>
+    </div>
+  </div>
+
+  <div class="panel">
+    <div class="panel-title">🌈 Visualisasi Skala Suhu</div>
+    <div class="thermo-wrap" style="background:var(--bg);border-radius:12px;padding:14px;margin-top:0">
+      <div class="thermo-bar">
+        <div class="thermo-marker"></div>
+      </div>
+      <div class="thermo-labels">
+        <span style="color:#3b82f6">0°C</span>
+        <span style="color:#10b981">Nyaman</span>
+        <span style="color:#f59e0b">Hangat</span>
+        <span style="color:#ef4444">50°C</span>
+      </div>
+    </div>
+    <p style="font-size:11px;color:var(--text-muted);margin-top:10px;line-height:1.6">Garis vertikal menunjukkan threshold 36°C — batas dimana kipas ventilasi diaktifkan otomatis.</p>
+  </div>
+
+  <div class="panel">
+    <div class="panel-title">📊 Klasifikasi Suhu Ruangan</div>
+    <div class="range-grid">
+      <div class="range-card rc-cool">
+        <div class="rv" style="color:#2563eb">&lt; 20°C</div>
+        <div class="rl" style="color:#1e40af">❄️ Dingin</div>
+        <div class="rd">Suhu rendah, pertimbangkan penghangatan ruangan</div>
+      </div>
+      <div class="range-card rc-comfort">
+        <div class="rv" style="color:var(--safe)">20–28°C</div>
+        <div class="rl" style="color:#065f46">✅ Nyaman</div>
+        <div class="rd">Suhu ideal untuk aktivitas dalam ruangan</div>
+      </div>
+      <div class="range-card rc-warm">
+        <div class="rv" style="color:#ea580c">28–36°C</div>
+        <div class="rl" style="color:#9a3412">⚠️ Hangat</div>
+        <div class="rd">Mulai panas, monitoring ditingkatkan</div>
+      </div>
+      <div class="range-card rc-hot">
+        <div class="rv" style="color:var(--danger)">&gt; 36°C</div>
+        <div class="rl" style="color:#991b1b">🌶️ Panas — Kipas!</div>
+        <div class="rd">Suhu tinggi — kipas ventilasi aktif otomatis</div>
+      </div>
+    </div>
+  </div>
+
+  <div class="panel">
+    <div class="panel-title">⚡ Respons Otomatis Sistem</div>
+    <div class="resp-item">
+      <div class="ri-icon">💨</div>
+      <div>
+        <div class="ri-name">Kipas Ventilasi Aktif</div>
+        <div class="ri-desc">Otomatis menyala ketika suhu melewati 36°C untuk sirkulasi udara</div>
+      </div>
+    </div>
+    <div class="resp-item">
+      <div class="ri-icon">🔔</div>
+      <div>
+        <div class="ri-name">Notifikasi Warning</div>
+        <div class="ri-desc">Status berubah ke WARNING saat suhu 28–36°C untuk pemantauan lebih ketat</div>
+      </div>
+    </div>
+    <div class="resp-item">
+      <div class="ri-icon">🚨</div>
+      <div>
+        <div class="ri-name">Mode Darurat</div>
+        <div class="ri-desc">Jika Suhu > 36°C + MQ-2 > 500 ppm → sistem kebakaran penuh aktif</div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<footer>
+  <div class="fc">© 2026 HIMATRO Universitas Lampung</div>
+  <div class="fs">Device: ESP32 | System: IoT Based Monitoring</div>
+  <div class="socials">
+    <a class="sb" href="https://www.instagram.com/himatro.unila/" target="_blank" title="Instagram"><svg viewBox="0 0 24 24"><path d="M12 2.163c3.204 0 3.584.012 4.85.07 3.252.148 4.771 1.691 4.919 4.919.058 1.265.069 1.645.069 4.849 0 3.205-.012 3.584-.069 4.849-.149 3.225-1.664 4.771-4.919 4.919-1.266.058-1.644.07-4.85.07-3.204 0-3.584-.012-4.849-.07-3.26-.149-4.771-1.699-4.919-4.92-.058-1.265-.07-1.644-.07-4.849 0-3.204.013-3.583.07-4.849.149-3.227 1.664-4.771 4.919-4.919 1.266-.057 1.645-.069 4.849-.069zM12 0C8.741 0 8.333.014 7.053.072 2.695.272.273 2.69.073 7.052.014 8.333 0 8.741 0 12c0 3.259.014 3.668.072 4.948.2 4.358 2.618 6.78 6.98 6.98C8.333 23.986 8.741 24 12 24c3.259 0 3.668-.014 4.948-.072 4.354-.2 6.782-2.618 6.979-6.98.059-1.28.073-1.689.073-4.948 0-3.259-.014-3.667-.072-4.947-.196-4.354-2.617-6.78-6.979-6.98C15.668.014 15.259 0 12 0zm0 5.838a6.162 6.162 0 100 12.324 6.162 6.162 0 000-12.324zM12 16a4 4 0 110-8 4 4 0 010 8zm6.406-11.845a1.44 1.44 0 100 2.881 1.44 1.44 0 000-2.881z"/></svg></a>
+    <a class="sb" href="https://himatrounila.id/" target="_blank" title="Website"><svg viewBox="0 0 24 24"><path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm-1 17.93c-3.95-.49-7-3.85-7-7.93 0-.62.08-1.21.21-1.79L9 15v1c0 1.1.9 2 2 2v1.93zm6.9-2.54c-.26-.81-1-1.39-1.9-1.39h-1v-3c0-.55-.45-1-1-1H8v-2h2c.55 0 1-.45 1-1V7h2c1.1 0 2-.9 2-2v-.41c2.93 1.19 5 4.06 5 7.41 0 2.08-.8 3.97-2.1 5.39z"/></svg></a>
+  </div>
+</footer>
